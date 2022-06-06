@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.23.2)
+
+project(sdl2-cmake)
+
+find_package(SDL2 REQUIRED)
+include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS} include)
+
+add_executable(${PROJECT_NAME}
+    src/main.c
+    src/util.c
+)
+
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
