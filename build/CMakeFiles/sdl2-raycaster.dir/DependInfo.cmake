@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/user/dev/sdl2-cmake/src/main.c" "CMakeFiles/sdl2-cmake.dir/src/main.c.o" "gcc" "CMakeFiles/sdl2-cmake.dir/src/main.c.o.d"
-  "/home/user/dev/sdl2-cmake/src/util.c" "CMakeFiles/sdl2-cmake.dir/src/util.c.o" "gcc" "CMakeFiles/sdl2-cmake.dir/src/util.c.o.d"
+  "/home/user/dev/sdl2-raycaster/src/main.c" "CMakeFiles/sdl2-raycaster.dir/src/main.c.o" "gcc" "CMakeFiles/sdl2-raycaster.dir/src/main.c.o.d"
+  "/home/user/dev/sdl2-raycaster/src/util.c" "CMakeFiles/sdl2-raycaster.dir/src/util.c.o" "gcc" "CMakeFiles/sdl2-raycaster.dir/src/util.c.o.d"
   )
 
 # Targets to which this target links.

@@ -1,6 +1,9 @@
 #include <SDL2/SDL.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdbool.h>
 #include "util.h"
+#include "map.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -9,6 +12,8 @@
 
 int main(int argc, char *argv[])
 {
+    printf("map:%i", map[2][2]);
+
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window *window = SDL_CreateWindow(

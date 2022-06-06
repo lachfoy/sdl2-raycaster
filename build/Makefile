@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/user/dev/sdl2-cmake
+CMAKE_SOURCE_DIR = /home/user/dev/sdl2-raycaster
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/user/dev/sdl2-cmake/build
+CMAKE_BINARY_DIR = /home/user/dev/sdl2-raycaster/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/dev/sdl2-cmake/build/CMakeFiles /home/user/dev/sdl2-cmake/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/dev/sdl2-raycaster/build/CMakeFiles /home/user/dev/sdl2-raycaster/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/dev/sdl2-cmake/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/dev/sdl2-raycaster/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named sdl2-cmake
+# Target rules for targets named sdl2-raycaster
 
 # Build rule for target.
-sdl2-cmake: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sdl2-cmake
-.PHONY : sdl2-cmake
+sdl2-raycaster: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sdl2-raycaster
+.PHONY : sdl2-raycaster
 
 # fast build rule for target.
-sdl2-cmake/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-cmake.dir/build.make CMakeFiles/sdl2-cmake.dir/build
-.PHONY : sdl2-cmake/fast
+sdl2-raycaster/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-raycaster.dir/build.make CMakeFiles/sdl2-raycaster.dir/build
+.PHONY : sdl2-raycaster/fast
 
 src/main.o: src/main.c.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-cmake.dir/build.make CMakeFiles/sdl2-cmake.dir/src/main.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-raycaster.dir/build.make CMakeFiles/sdl2-raycaster.dir/src/main.c.o
 .PHONY : src/main.c.o
 
 src/main.i: src/main.c.i
@@ -142,7 +142,7 @@ src/main.i: src/main.c.i
 
 # target to preprocess a source file
 src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-cmake.dir/build.make CMakeFiles/sdl2-cmake.dir/src/main.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-raycaster.dir/build.make CMakeFiles/sdl2-raycaster.dir/src/main.c.i
 .PHONY : src/main.c.i
 
 src/main.s: src/main.c.s
@@ -150,7 +150,7 @@ src/main.s: src/main.c.s
 
 # target to generate assembly for a file
 src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-cmake.dir/build.make CMakeFiles/sdl2-cmake.dir/src/main.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-raycaster.dir/build.make CMakeFiles/sdl2-raycaster.dir/src/main.c.s
 .PHONY : src/main.c.s
 
 src/util.o: src/util.c.o
@@ -158,7 +158,7 @@ src/util.o: src/util.c.o
 
 # target to build an object file
 src/util.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-cmake.dir/build.make CMakeFiles/sdl2-cmake.dir/src/util.c.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-raycaster.dir/build.make CMakeFiles/sdl2-raycaster.dir/src/util.c.o
 .PHONY : src/util.c.o
 
 src/util.i: src/util.c.i
@@ -166,7 +166,7 @@ src/util.i: src/util.c.i
 
 # target to preprocess a source file
 src/util.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-cmake.dir/build.make CMakeFiles/sdl2-cmake.dir/src/util.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-raycaster.dir/build.make CMakeFiles/sdl2-raycaster.dir/src/util.c.i
 .PHONY : src/util.c.i
 
 src/util.s: src/util.c.s
@@ -174,7 +174,7 @@ src/util.s: src/util.c.s
 
 # target to generate assembly for a file
 src/util.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-cmake.dir/build.make CMakeFiles/sdl2-cmake.dir/src/util.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sdl2-raycaster.dir/build.make CMakeFiles/sdl2-raycaster.dir/src/util.c.s
 .PHONY : src/util.c.s
 
 # Help Target
@@ -185,7 +185,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... sdl2-cmake"
+	@echo "... sdl2-raycaster"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

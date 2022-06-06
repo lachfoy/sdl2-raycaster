@@ -1,5 +1,5 @@
-CMakeFiles/sdl2-cmake.dir/src/main.c.o: \
- /home/user/dev/sdl2-cmake/src/main.c /usr/include/stdc-predef.h \
+CMakeFiles/sdl2-raycaster.dir/src/main.c.o: \
+ /home/user/dev/sdl2-raycaster/src/main.c /usr/include/stdc-predef.h \
  /usr/include/SDL2/SDL.h /usr/include/SDL2/SDL_main.h \
  /usr/include/SDL2/SDL_stdinc.h /usr/include/SDL2/SDL_config.h \
  /usr/include/x86_64-linux-gnu/SDL2/_real_SDL_config.h \
@@ -150,4 +150,6 @@ CMakeFiles/sdl2-cmake.dir/src/main.c.o: \
  /usr/include/SDL2/SDL_render.h /usr/include/SDL2/SDL_sensor.h \
  /usr/include/SDL2/SDL_shape.h /usr/include/SDL2/SDL_system.h \
  /usr/include/SDL2/SDL_timer.h /usr/include/SDL2/SDL_version.h \
- /home/user/dev/sdl2-cmake/include/util.h
+ /usr/lib/gcc/x86_64-linux-gnu/9/include/stdbool.h \
+ /home/user/dev/sdl2-raycaster/include/util.h \
+ /home/user/dev/sdl2-raycaster/include/map.h

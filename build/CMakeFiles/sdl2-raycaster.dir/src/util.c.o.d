@@ -1,6 +1,6 @@
-CMakeFiles/sdl2-cmake.dir/src/util.c.o: \
- /home/user/dev/sdl2-cmake/src/util.c /usr/include/stdc-predef.h \
- /home/user/dev/sdl2-cmake/include/util.h \
+CMakeFiles/sdl2-raycaster.dir/src/util.c.o: \
+ /home/user/dev/sdl2-raycaster/src/util.c /usr/include/stdc-predef.h \
+ /home/user/dev/sdl2-raycaster/include/util.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \

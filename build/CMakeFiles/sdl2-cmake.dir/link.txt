@@ -1,1 +1,0 @@
-/usr/bin/gcc -g "CMakeFiles/sdl2-cmake.dir/src/main.c.o" "CMakeFiles/sdl2-cmake.dir/src/util.c.o" -o sdl2-cmake  -lSDL2 
