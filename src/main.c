@@ -19,7 +19,11 @@ int main(int argc, char *argv[])
 {
     printf("test\n");
 
-    SDL_Init(SDL_INIT_VIDEO);
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        printf("%s\n", SDL_GetError());
+        return 1;
+    }
 
     SDL_Window *window = SDL_CreateWindow(
         "sdl2-raycaster",
@@ -28,13 +32,30 @@ int main(int argc, char *argv[])
         WINDOW_WIDTH,
         WINDOW_HEIGHT,
         0);
+    if (window == NULL)
+    {
+        printf("%s\n", SDL_GetError());
+        return 1;
+    }
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, RENDER_WIDTH, RENDER_HEIGHT);
+    if (renderer == NULL)
+    {
+        printf("%s\n", SDL_GetError());
+        return 1;
+    }
 
+    SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, RENDER_WIDTH, RENDER_HEIGHT);
+    if (texture == NULL)
+    {
+        printf("%s\n", SDL_GetError());
+        return 1;
+    }
+
+    // MAIN LOOP
     int quit = false;
     SDL_Event e;
-    while(quit == false)
+    while(!quit)
     {
         // The Back Buffer texture may be stored with an extra bit of width (pitch) on the video card in order to properly
         // align it in VRAM should the width not lie on the correct memory boundary (usually four bytes).

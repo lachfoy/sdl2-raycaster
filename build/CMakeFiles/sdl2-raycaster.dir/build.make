@@ -73,29 +73,29 @@ CMakeFiles/sdl2-raycaster.dir/src/main.c.o: CMakeFiles/sdl2-raycaster.dir/flags.
 CMakeFiles/sdl2-raycaster.dir/src/main.c.o: ../src/main.c
 CMakeFiles/sdl2-raycaster.dir/src/main.c.o: CMakeFiles/sdl2-raycaster.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/sdl2-raycaster/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/sdl2-raycaster.dir/src/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/sdl2-raycaster.dir/src/main.c.o -MF CMakeFiles/sdl2-raycaster.dir/src/main.c.o.d -o CMakeFiles/sdl2-raycaster.dir/src/main.c.o -c /home/user/dev/sdl2-raycaster/src/main.c
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/sdl2-raycaster.dir/src/main.c.o -MF CMakeFiles/sdl2-raycaster.dir/src/main.c.o.d -o CMakeFiles/sdl2-raycaster.dir/src/main.c.o -c /home/user/dev/sdl2-raycaster/src/main.c
 
 CMakeFiles/sdl2-raycaster.dir/src/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sdl2-raycaster.dir/src/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/user/dev/sdl2-raycaster/src/main.c > CMakeFiles/sdl2-raycaster.dir/src/main.c.i
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/user/dev/sdl2-raycaster/src/main.c > CMakeFiles/sdl2-raycaster.dir/src/main.c.i
 
 CMakeFiles/sdl2-raycaster.dir/src/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sdl2-raycaster.dir/src/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/user/dev/sdl2-raycaster/src/main.c -o CMakeFiles/sdl2-raycaster.dir/src/main.c.s
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/user/dev/sdl2-raycaster/src/main.c -o CMakeFiles/sdl2-raycaster.dir/src/main.c.s
 
 CMakeFiles/sdl2-raycaster.dir/src/util.c.o: CMakeFiles/sdl2-raycaster.dir/flags.make
 CMakeFiles/sdl2-raycaster.dir/src/util.c.o: ../src/util.c
 CMakeFiles/sdl2-raycaster.dir/src/util.c.o: CMakeFiles/sdl2-raycaster.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/user/dev/sdl2-raycaster/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/sdl2-raycaster.dir/src/util.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/sdl2-raycaster.dir/src/util.c.o -MF CMakeFiles/sdl2-raycaster.dir/src/util.c.o.d -o CMakeFiles/sdl2-raycaster.dir/src/util.c.o -c /home/user/dev/sdl2-raycaster/src/util.c
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/sdl2-raycaster.dir/src/util.c.o -MF CMakeFiles/sdl2-raycaster.dir/src/util.c.o.d -o CMakeFiles/sdl2-raycaster.dir/src/util.c.o -c /home/user/dev/sdl2-raycaster/src/util.c
 
 CMakeFiles/sdl2-raycaster.dir/src/util.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/sdl2-raycaster.dir/src/util.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/user/dev/sdl2-raycaster/src/util.c > CMakeFiles/sdl2-raycaster.dir/src/util.c.i
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/user/dev/sdl2-raycaster/src/util.c > CMakeFiles/sdl2-raycaster.dir/src/util.c.i
 
 CMakeFiles/sdl2-raycaster.dir/src/util.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/sdl2-raycaster.dir/src/util.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/user/dev/sdl2-raycaster/src/util.c -o CMakeFiles/sdl2-raycaster.dir/src/util.c.s
+	/usr/bin/gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/user/dev/sdl2-raycaster/src/util.c -o CMakeFiles/sdl2-raycaster.dir/src/util.c.s
 
 # Object files for target sdl2-raycaster
 sdl2__raycaster_OBJECTS = \

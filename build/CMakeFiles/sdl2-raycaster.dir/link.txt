@@ -1,1 +1,1 @@
-/usr/bin/cc "CMakeFiles/sdl2-raycaster.dir/src/main.c.o" "CMakeFiles/sdl2-raycaster.dir/src/util.c.o" -o sdl2-raycaster  -lSDL2 
+/usr/bin/gcc "CMakeFiles/sdl2-raycaster.dir/src/main.c.o" "CMakeFiles/sdl2-raycaster.dir/src/util.c.o" -o sdl2-raycaster  -lSDL2 
