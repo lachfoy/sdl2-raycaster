@@ -10,18 +10,15 @@
 #define RENDER_WIDTH 100
 #define RENDER_HEIGHT 75
 
-typedef struct Player
-{
-    double posX = 22, posY = 12;
-    double dirX = -1, dirY = 0; //initial direction vector
-    double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
-} Player;
-
-double time = 0; //time of current frame
-double oldTime = 0; //time of previous frame
+// typedef struct Player
+// {
+//     double posX, posY;
+// } Player;
 
 int main(int argc, char *argv[])
 {
+    printf("test\n");
+
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window *window = SDL_CreateWindow(
@@ -37,7 +34,7 @@ int main(int argc, char *argv[])
 
     int quit = false;
     SDL_Event e;
-    while(!quit)
+    while(quit == false)
     {
         // The Back Buffer texture may be stored with an extra bit of width (pitch) on the video card in order to properly
         // align it in VRAM should the width not lie on the correct memory boundary (usually four bytes).
@@ -56,7 +53,6 @@ int main(int argc, char *argv[])
             // Fill texture with randomly colored pixels
             for (uint32_t i = 0; i < RENDER_WIDTH * RENDER_HEIGHT; ++i)
                 buffer[i] = ARGB(FastRand() % 256, FastRand() % 256, FastRand() % 256, 255);
-                // pPixelBuffer[i] =  (255 << 24) | (123 << 16) | (11 << 8) | 240;
 
 
             // Unlock the texture in VRAM to let the GPU know we are done writing to it
