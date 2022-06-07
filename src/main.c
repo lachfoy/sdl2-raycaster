@@ -2,22 +2,25 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>
+
 #include "util.h"
 #include "map.h"
+#include "game.h"
+#include "raycast.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 #define RENDER_WIDTH 100
 #define RENDER_HEIGHT 75
 
-// typedef struct Player
-// {
-//     double posX, posY;
-// } Player;
-
 int main(int argc, char *argv[])
 {
-    printf("test\n");
+    double posX = 22, posY = 12;  //x and y start position
+    double dirX = -1, dirY = 0; //initial direction vector
+    double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
+
+    double time = 0; //time of current frame
+    double oldTime = 0; //time of previous frame
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -76,6 +79,23 @@ int main(int argc, char *argv[])
                 // buffer[i] = ARGB(FastRand() % 256, FastRand() % 256, FastRand() % 256, 255);
                 buffer[i] = 0x40AAEE; // fill with nice light blue pixels :)
 
+
+            // raycast???
+            for (int x = 0; x < RENDER_WIDTH; x++)
+            {
+                hitInfo info = raycast(x, RENDER_WIDTH, RENDER_HEIGHT, level_map,
+                    posX, posY, dirX, dirY, planeX, planeY);
+
+                // draw a vertical stripe
+                for (uint32_t y = info.drawStart; y < info.drawEnd; ++y)
+                {
+                    // width * row + col
+                    buffer[RENDER_WIDTH * y + x] = 0x0000EE;
+                } 
+            }
+
+            int x = 15, y = 90;
+            buffer[RENDER_WIDTH * y + x] = 0x0000EE;
 
             // Unlock the texture in VRAM to let the GPU know we are done writing to it
             SDL_UnlockTexture(texture);
