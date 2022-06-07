@@ -73,7 +73,8 @@ int main(int argc, char *argv[])
 
             // Fill texture with randomly colored pixels
             for (uint32_t i = 0; i < RENDER_WIDTH * RENDER_HEIGHT; ++i)
-                buffer[i] = ARGB(FastRand() % 256, FastRand() % 256, FastRand() % 256, 255);
+                // buffer[i] = ARGB(FastRand() % 256, FastRand() % 256, FastRand() % 256, 255);
+                buffer[i] = 0x40AAEE; // fill with nice light blue pixels :)
 
 
             // Unlock the texture in VRAM to let the GPU know we are done writing to it
