@@ -10,14 +10,22 @@
 #define RENDER_WIDTH 100
 #define RENDER_HEIGHT 75
 
+typedef struct Player
+{
+    double posX = 22, posY = 12;
+    double dirX = -1, dirY = 0; //initial direction vector
+    double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
+} Player;
+
+double time = 0; //time of current frame
+double oldTime = 0; //time of previous frame
+
 int main(int argc, char *argv[])
 {
-    printf("map:%i", map[2][2]);
-
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window *window = SDL_CreateWindow(
-        "sdl2-cmake",
+        "sdl2-raycaster",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
         WINDOW_WIDTH,
@@ -27,9 +35,9 @@ int main(int argc, char *argv[])
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, RENDER_WIDTH, RENDER_HEIGHT);
 
-    int quit = 0;
+    int quit = false;
     SDL_Event e;
-    while(quit == 0)
+    while(!quit)
     {
         // The Back Buffer texture may be stored with an extra bit of width (pitch) on the video card in order to properly
         // align it in VRAM should the width not lie on the correct memory boundary (usually four bytes).
@@ -67,7 +75,7 @@ int main(int argc, char *argv[])
             {
             case SDL_KEYDOWN:
             case SDL_QUIT:
-                quit = 1;
+                quit = true;
             }
         }
     }

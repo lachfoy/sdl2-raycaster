@@ -186,6 +186,7 @@ CMakeFiles/sdl2-raycaster.dir/src/main.c.o: ../src/main.c \
   /usr/include/SDL2/SDL_system.h \
   /usr/include/SDL2/SDL_timer.h \
   /usr/include/SDL2/SDL_version.h \
+  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdbool.h \
   ../include/util.h \
   ../include/map.h
 
@@ -209,6 +210,8 @@ CMakeFiles/sdl2-raycaster.dir/src/util.c.o: ../src/util.c \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h
 
+
+/usr/lib/gcc/x86_64-linux-gnu/9/include/stdbool.h:
 
 /usr/include/SDL2/SDL_timer.h:
 

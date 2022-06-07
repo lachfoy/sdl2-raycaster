@@ -187,6 +187,7 @@ CMakeFiles/sdl2-raycaster.dir/src/main.c.o
  /usr/include/SDL2/SDL_system.h
  /usr/include/SDL2/SDL_timer.h
  /usr/include/SDL2/SDL_version.h
+ /usr/lib/gcc/x86_64-linux-gnu/9/include/stdbool.h
  /home/user/dev/sdl2-raycaster/include/util.h
  /home/user/dev/sdl2-raycaster/include/map.h
 
