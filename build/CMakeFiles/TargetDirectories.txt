@@ -1,3 +1,0 @@
-/home/user/dev/sdl2-raycaster/build/CMakeFiles/sdl2-raycaster.dir
-/home/user/dev/sdl2-raycaster/build/CMakeFiles/edit_cache.dir
-/home/user/dev/sdl2-raycaster/build/CMakeFiles/rebuild_cache.dir
