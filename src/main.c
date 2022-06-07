@@ -5,7 +5,6 @@
 
 #include "util.h"
 #include "map.h"
-#include "game.h"
 #include "raycast.h"
 
 #define WINDOW_WIDTH 800
