@@ -1,9 +1,9 @@
 #include "raycast.h"
 
-hitInfo raycast(int x, int renderW, int renderH, uint8_t map[10][10], double posX, double posY, double dirX, double dirY, double planeX, double planeY)
+hitInfo raycast(int x, uint8_t map[10][10], double posX, double posY, double dirX, double dirY, double planeX, double planeY)
 {
     // calculate ray position and direction
-    double cameraX = 2 * x / (double)(renderW)-1; // x-coordinate in camera space
+    double cameraX = 2 * x / (double)(RENDER_WIDTH)-1; // x-coordinate in camera space
     double rayDirX = dirX + planeX * cameraX;
     double rayDirY = dirY + planeY * cameraX;
 
@@ -77,15 +77,15 @@ hitInfo raycast(int x, int renderW, int renderH, uint8_t map[10][10], double pos
         perpWallDist = (sideDistY - deltaDistY);
 
     // Calculate height of line to draw on screen
-    int lineHeight = (int)(renderH / perpWallDist);
+    int lineHeight = (int)(RENDER_HEIGHT / perpWallDist);
 
     // calculate lowest and highest pixel to fill in current stripe
-    int drawStart = -lineHeight / 2 + renderH / 2;
+    int drawStart = -lineHeight / 2 + RENDER_HEIGHT / 2;
     if (drawStart < 0)
         drawStart = 0;
-    int drawEnd = lineHeight / 2 + renderH / 2;
-    if (drawEnd >= renderH)
-        drawEnd = renderH - 1;
+    int drawEnd = lineHeight / 2 + RENDER_HEIGHT / 2;
+    if (drawEnd >= RENDER_HEIGHT)
+        drawEnd = RENDER_HEIGHT - 1;
 
     // return data as a struct
     hitInfo info;

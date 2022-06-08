@@ -6,11 +6,7 @@
 #include "util.h"
 #include "map.h"
 #include "raycast.h"
-
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
-#define RENDER_WIDTH 100
-#define RENDER_HEIGHT 75
+#include "defines.h"
 
 int main(int argc, char *argv[])
 {
@@ -82,7 +78,7 @@ int main(int argc, char *argv[])
             // raycast???
             for (int x = 0; x < RENDER_WIDTH; x++)
             {
-                hitInfo info = raycast(x, RENDER_WIDTH, RENDER_HEIGHT, level_map,
+                hitInfo info = raycast(x, level_map,
                     posX, posY, dirX, dirY, planeX, planeY);
 
                 // draw a vertical stripe

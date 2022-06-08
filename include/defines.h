@@ -1,0 +1,9 @@
+#ifndef DEFINES_H
+#define DEFINES_H
+
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
+#define RENDER_WIDTH 100
+#define RENDER_HEIGHT 75
+
+#endif
