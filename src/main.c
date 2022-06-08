@@ -7,6 +7,7 @@
 #include "map.h"
 #include "raycast.h"
 #include "defines.h"
+#include "render.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +18,7 @@ int main(int argc, char *argv[])
     double time = 0; //time of current frame
     double oldTime = 0; //time of previous frame
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         printf("%s\n", SDL_GetError());
         return 1;
@@ -36,15 +37,8 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-    if (renderer == NULL)
-    {
-        printf("%s\n", SDL_GetError());
-        return 1;
-    }
 
-    SDL_Texture *texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, RENDER_WIDTH, RENDER_HEIGHT);
-    if (texture == NULL)
+    if (renderInit(window) != 0)
     {
         printf("%s\n", SDL_GetError());
         return 1;
@@ -55,52 +49,7 @@ int main(int argc, char *argv[])
     SDL_Event e;
     while(!quit)
     {
-        // The Back Buffer texture may be stored with an extra bit of width (pitch) on the video card in order to properly
-        // align it in VRAM should the width not lie on the correct memory boundary (usually four bytes).
-        int32_t pitch = 0;
-
-        // This will hold a pointer to the memory position in VRAM where our Back Buffer texture lies
-        uint32_t* buffer = NULL;
-
-        // Lock the memory in order to write our Back Buffer image to it
-        if (!SDL_LockTexture(texture, NULL, (void**)&buffer, &pitch))
-        {
-            // The pitch of the Back Buffer texture in VRAM must be divided by four bytes
-            // as it will always be a multiple of four
-            pitch /= sizeof(uint32_t);
-
-            // Fill texture with randomly colored pixels
-            for (uint32_t i = 0; i < RENDER_WIDTH * RENDER_HEIGHT; ++i)
-                // buffer[i] = ARGB(FastRand() % 256, FastRand() % 256, FastRand() % 256, 255);
-                buffer[i] = 0x40AAEE; // fill with nice light blue pixels :)
-
-
-            // raycast???
-            for (int x = 0; x < RENDER_WIDTH; x++)
-            {
-                hitInfo info = raycast(x, level_map,
-                    posX, posY, dirX, dirY, planeX, planeY);
-
-                // draw a vertical stripe
-                for (uint32_t y = info.drawStart; y < info.drawEnd; ++y)
-                {
-                    // width * row + col
-                    buffer[RENDER_WIDTH * y + x] = 0x0000EE;
-                } 
-            }
-
-            int x = 15, y = 90;
-            buffer[RENDER_WIDTH * y + x] = 0x0000EE;
-
-            // Unlock the texture in VRAM to let the GPU know we are done writing to it
-            SDL_UnlockTexture(texture);
-
-            // Copy our texture in VRAM to the display framebuffer in VRAM
-            SDL_RenderCopy(renderer, texture, NULL, NULL);
-
-            // Copy the VRAM framebuffer to the display
-            SDL_RenderPresent(renderer);
-        }
+        renderClear(0x00FF00);
 
         while (SDL_PollEvent(&e))
         {
@@ -113,8 +62,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    SDL_DestroyTexture(texture);
-    SDL_DestroyRenderer(renderer);
+    renderCleanup();
     SDL_DestroyWindow(window);
     
     SDL_Quit();
