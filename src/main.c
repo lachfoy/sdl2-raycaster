@@ -8,10 +8,11 @@
 #include "defines.h"
 #include "draw.h"
 #include "map.h"
+#include "debug_draw.h"
 
 int main(int argc, char *argv[])
 {
-    double posX = 22, posY = 12;  //x and y start position
+    double posX = 1, posY = 1;  //x and y start position
     double dirX = -1, dirY = 0; //initial direction vector
     double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
 
@@ -20,8 +21,8 @@ int main(int argc, char *argv[])
 
     Map test_map;
     generate_test_map(&test_map);
-    for (int i = 0; i < 10 * 10; i++)
-        printf("%i\n", (&test_map)->data[i]);
+    // for (int i = 0; i < 10 * 10; i++)
+    //     printf("%i\n", (&test_map)->data[i]);
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
@@ -75,9 +76,10 @@ int main(int argc, char *argv[])
             // as it will always be a multiple of four
             pitch /= sizeof(uint32_t);
 
-            draw_raycast(buffer, &test_map, posX, posY, dirX, dirY, planeX, planeY);
-            //draw_cls(renderer, texture, 0x0000FF);
-            //draw_pixel(buffer, 50, 50, 0xFF0000);
+            //draw_raycast(buffer, &test_map, posX, posY, dirX, dirY, planeX, planeY);
+            for (uint32_t i = 0; i < RENDER_WIDTH * RENDER_HEIGHT; ++i)
+                buffer[i] = 0x0000AA;
+            draw_pixel(buffer, (int)posX, (int)posY, 0xFF0000);
 
             // Unlock the texture in VRAM to let the GPU know we are done writing to it
             SDL_UnlockTexture(texture);
@@ -85,17 +87,49 @@ int main(int argc, char *argv[])
             // Copy our texture in VRAM to the display framebuffer in VRAM
             SDL_RenderCopy(renderer, texture, NULL, NULL);
 
-            // Copy the VRAM framebuffer to the display
-            SDL_RenderPresent(renderer);
+            
         }
+
+        debug_draw_map(renderer, &test_map);
+        debug_draw_object(renderer, posX, posY);
+
+        // Copy the VRAM framebuffer to the display
+        SDL_RenderPresent(renderer);
 
         while (SDL_PollEvent(&e))
         {
-            switch (e.type)
+            if (e.type == SDL_QUIT)
             {
-            case SDL_KEYDOWN:
-            case SDL_QUIT:
                 quit = true;
+                break;
+            }
+            else if (e.type == SDL_KEYDOWN)
+            {
+                switch (e.key.keysym.sym)
+                {
+                case SDLK_ESCAPE:
+                    quit = true;
+                    break;
+                
+                case SDLK_UP:
+                    posY -= 0.2;
+                    break;
+
+                case SDLK_DOWN:
+                    posY += 0.2;
+                    break;
+                
+                case SDLK_LEFT:
+                    posX -= 0.2;
+                    break;
+
+                case SDLK_RIGHT:
+                    posX += 0.2;
+                    break;
+
+                default:
+                    break;
+                }
             }
         }
 
