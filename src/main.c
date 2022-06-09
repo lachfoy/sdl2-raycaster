@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "utils.h"
 #include "map.h"
 #include "raycast.h"
 #include "defines.h"

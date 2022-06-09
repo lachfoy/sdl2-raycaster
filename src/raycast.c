@@ -8,8 +8,8 @@ hitInfo raycast(int x, uint8_t map[10][10], double posX, double posY, double dir
     double rayDirY = dirY + planeY * cameraX;
 
     // which box of the map we're in
-    int mapX = (int)(posX);
-    int mapY = (int)(posY);
+    uint8_t mapX = (uint8_t)(posX);
+    uint8_t mapY = (uint8_t)(posY);
 
     // length of ray from current position to next x or y-side
     double sideDistX;
@@ -21,11 +21,11 @@ hitInfo raycast(int x, uint8_t map[10][10], double posX, double posY, double dir
     double perpWallDist;
 
     // what direction to step in x or y-direction (either +1 or -1)
-    int stepX;
-    int stepY;
+    int8_t stepX;
+    int8_t stepY;
 
-    int hit = 0; // was there a wall hit?
-    int side;    // was a NS or a EW wall hit?
+    uint8_t hit = 0; // was there a wall hit?
+    uint8_t side;    // was a NS or a EW wall hit?
 
     // calculate step and initial sideDist
     if (rayDirX < 0)
