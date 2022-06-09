@@ -8,7 +8,7 @@ include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS} include)
 add_executable(${PROJECT_NAME}
     src/main.c
     src/draw.c
-    src/raycast.c
+    src/map.c
 )
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})

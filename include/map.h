@@ -2,21 +2,19 @@
 #define MAP_H
 
 #include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-#define MAP_WIDTH 10
-#define MAP_HEIGHT 10
+typedef struct Map
+{
+    uint8_t* data;
+    uint8_t width;
+    uint8_t height;
 
-uint8_t level_map[MAP_WIDTH][MAP_HEIGHT] = {
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 1, 1, 1, 0, 1},
-    {1, 0, 0, 0, 0, 1, 0, 1, 0, 1},
-    {1, 0, 0, 0, 0, 1, 1, 1, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-};
+} Map;
+
+// generate a test map
+// later this will probably be done by loading a binary or plaintext file
+void generate_test_map(Map* test_map);
 
 #endif

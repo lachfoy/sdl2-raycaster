@@ -2,11 +2,12 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-#include "map.h"
-#include "raycast.h"
 #include "defines.h"
 #include "draw.h"
+#include "map.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +17,11 @@ int main(int argc, char *argv[])
 
     double time = 0; //time of current frame
     double oldTime = 0; //time of previous frame
+
+    Map test_map;
+    generate_test_map(&test_map);
+    for (int i = 0; i < 10 * 10; i++)
+        printf("%i\n", (&test_map)->data[i]);
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
@@ -69,8 +75,9 @@ int main(int argc, char *argv[])
             // as it will always be a multiple of four
             pitch /= sizeof(uint32_t);
 
+            draw_raycast(buffer, &test_map, posX, posY, dirX, dirY, planeX, planeY);
             //draw_cls(renderer, texture, 0x0000FF);
-            draw_pixel(buffer, 50, 50, 0xFF0000);
+            //draw_pixel(buffer, 50, 50, 0xFF0000);
 
             // Unlock the texture in VRAM to let the GPU know we are done writing to it
             SDL_UnlockTexture(texture);
