@@ -15,7 +15,7 @@ void draw_raycast(uint32_t *buffer, Map* map,
     for (int x = 0; x < RENDER_WIDTH; x++) // calculate a ray for each horizontal pixel
     {
         // calculate ray position and direction
-        double cameraX = 2 * x / (double)(RENDER_WIDTH)-1; // x-coordinate in camera space
+        double cameraX = 2 * x / (double)(RENDER_WIDTH) - 1; // x-coordinate in camera space
         double rayDirX = dirX + planeX * cameraX;
         double rayDirY = dirY + planeY * cameraX;
 
@@ -30,6 +30,10 @@ void draw_raycast(uint32_t *buffer, Map* map,
         // length of ray from one x or y-side to next x or y-side
         double deltaDistX = (rayDirX == 0) ? 1e30 : abs(1 / rayDirX);
         double deltaDistY = (rayDirY == 0) ? 1e30 : abs(1 / rayDirY);
+        //deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX))
+        //deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY))
+        // double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+        // double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
         double perpWallDist;
 
         // what direction to step in x or y-direction (either +1 or -1)
@@ -99,11 +103,11 @@ void draw_raycast(uint32_t *buffer, Map* map,
         if (drawEnd >= RENDER_HEIGHT)
             drawEnd = RENDER_HEIGHT - 1;
 
-        uint32_t wall_color = (side == 1) ? 0xAA00BB : 0xFF0000;
+        uint32_t wall_color = (side == 1) ? 0xAA00BB : 0xEE00DD;
 
-        for (int y = drawStart; y < drawEnd; ++y) // draw a vertical strip into the pixel buffer
+        for (int y = drawStart; y < drawEnd+1; ++y) // draw a vertical strip into the pixel buffer
         {
-            buffer[RENDER_WIDTH * y + x] = 0xFF00FF;
+            buffer[RENDER_WIDTH * y + x] = wall_color;
         }
     }
 }

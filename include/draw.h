@@ -2,6 +2,7 @@
 #define DRAW_H
 
 #include <stdint.h>
+#include <math.h>
 
 #include "defines.h"
 #include "map.h"

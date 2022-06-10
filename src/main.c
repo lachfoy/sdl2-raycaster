@@ -12,7 +12,7 @@
 
 int main(int argc, char *argv[])
 {
-    double posX = 1, posY = 1;  //x and y start position
+    double posX = 2, posY = 3;  //x and y start position
     double dirX = -1, dirY = 0; //initial direction vector
     double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
 
@@ -76,22 +76,20 @@ int main(int argc, char *argv[])
             // as it will always be a multiple of four
             pitch /= sizeof(uint32_t);
 
-            //draw_raycast(buffer, &test_map, posX, posY, dirX, dirY, planeX, planeY);
+            
             for (uint32_t i = 0; i < RENDER_WIDTH * RENDER_HEIGHT; ++i)
                 buffer[i] = 0x0000AA;
-            draw_pixel(buffer, (int)posX, (int)posY, 0xFF0000);
+            draw_raycast(buffer, &test_map, posX, posY, dirX, dirY, planeX, planeY);
 
             // Unlock the texture in VRAM to let the GPU know we are done writing to it
             SDL_UnlockTexture(texture);
 
             // Copy our texture in VRAM to the display framebuffer in VRAM
             SDL_RenderCopy(renderer, texture, NULL, NULL);
-
-            
         }
 
         debug_draw_map(renderer, &test_map);
-        debug_draw_object(renderer, posX, posY);
+        debug_draw_object(renderer, posX, posY, dirX, dirY);
 
         // Copy the VRAM framebuffer to the display
         SDL_RenderPresent(renderer);
@@ -135,6 +133,8 @@ int main(int argc, char *argv[])
 
         SDL_Delay(33.3);
     }
+
+    free(test_map.data);
 
     SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer);

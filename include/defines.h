@@ -3,7 +3,7 @@
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
-#define RENDER_WIDTH 100
-#define RENDER_HEIGHT 75
+#define RENDER_WIDTH 300
+#define RENDER_HEIGHT 200
 
 #endif

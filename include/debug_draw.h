@@ -8,7 +8,7 @@
 #define DEBUG_DRAW_SIZE 32
 
 void debug_draw_map(SDL_Renderer* renderer, Map* map);
-void debug_draw_object(SDL_Renderer* renderer, double posX, double posY);
+void debug_draw_object(SDL_Renderer* renderer, double posX, double posY, double dirX, double dirY);
 
 void debug_draw_map(SDL_Renderer* renderer, Map* map)
 {
@@ -22,11 +22,14 @@ void debug_draw_map(SDL_Renderer* renderer, Map* map)
         }
 }
 
-void debug_draw_object(SDL_Renderer* renderer, double x, double y)
+void debug_draw_object(SDL_Renderer* renderer, double x, double y, double dirX, double dirY)
 {
-    SDL_Rect debug_tile = { (x * DEBUG_DRAW_SIZE) + (DEBUG_DRAW_SIZE / 4), (y * DEBUG_DRAW_SIZE) + (DEBUG_DRAW_SIZE / 4), DEBUG_DRAW_SIZE / 2, DEBUG_DRAW_SIZE / 2};
+    SDL_Rect debug_tile = { (x * DEBUG_DRAW_SIZE) - (DEBUG_DRAW_SIZE / 4), (y * DEBUG_DRAW_SIZE) - (DEBUG_DRAW_SIZE / 4), DEBUG_DRAW_SIZE / 2, DEBUG_DRAW_SIZE / 2};
     SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0xAA, 0xFF);
     SDL_RenderDrawRect(renderer, &debug_tile);
+
+    SDL_SetRenderDrawColor(renderer, 0xCC, 0xCC, 0xAA, 0xFF);
+    SDL_RenderDrawLine(renderer, x * DEBUG_DRAW_SIZE, y * DEBUG_DRAW_SIZE, (x + dirX) * DEBUG_DRAW_SIZE, (y + dirY) * DEBUG_DRAW_SIZE);
 }
 
 #endif
