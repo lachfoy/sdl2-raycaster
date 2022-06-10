@@ -24,6 +24,16 @@ int main(int argc, char *argv[])
     // for (int i = 0; i < 10 * 10; i++)
     //     printf("%i\n", (&test_map)->data[i]);
 
+    // create an xor bitmap texture for testing
+    uint32_t* test_texture;
+    test_texture = (uint32_t*)malloc(sizeof(uint32_t) * TEX_WIDTH * TEX_HEIGHT);
+    for (uint8_t x = 0; x < TEX_WIDTH; x++)
+        for (uint8_t y = 0; y < TEX_HEIGHT; y++)
+        {
+            uint32_t xorcolor = (x * 256 / TEX_WIDTH) ^ (y * 256 / TEX_HEIGHT);
+            test_texture[TEX_WIDTH * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor;;
+        }
+
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         printf("%s\n", SDL_GetError());
@@ -79,7 +89,7 @@ int main(int argc, char *argv[])
             
             for (uint32_t i = 0; i < RENDER_WIDTH * RENDER_HEIGHT; ++i)
                 buffer[i] = 0x0000AA;
-            draw_raycast(buffer, &test_map, posX, posY, dirX, dirY, planeX, planeY);
+            draw_raycast(buffer, &test_map, test_texture, posX, posY, dirX, dirY, planeX, planeY);
 
             // Unlock the texture in VRAM to let the GPU know we are done writing to it
             SDL_UnlockTexture(texture);
@@ -135,6 +145,7 @@ int main(int argc, char *argv[])
     }
 
     free(test_map.data);
+    free(test_texture);
 
     SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer);

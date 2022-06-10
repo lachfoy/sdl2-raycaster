@@ -8,7 +8,7 @@ void draw_pixel(uint32_t *buffer, uint32_t x, uint32_t y, uint32_t color)
     }
 }
 
-void draw_raycast(uint32_t *buffer, Map* map,
+void draw_raycast(uint32_t *buffer, Map* map, uint32_t *texture,
     float posX, float posY, float dirX, float dirY,
     float planeX, float planeY)
 {
@@ -28,12 +28,8 @@ void draw_raycast(uint32_t *buffer, Map* map,
         float sideDistY;
 
         // length of ray from one x or y-side to next x or y-side
-        // float deltaDistX = (rayDirX == 0) ? 1e30 : abs(1 / rayDirX);
-        // float deltaDistY = (rayDirY == 0) ? 1e30 : abs(1 / rayDirY);
-        //deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX))
-        //deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY))
-        float deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-        float deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+        float deltaDistX = (rayDirX == 0) ? 1e30 : fabsf(1 / rayDirX);
+        float deltaDistY = (rayDirY == 0) ? 1e30 : fabsf(1 / rayDirY);
         float perpWallDist;
 
         // what direction to step in x or y-direction (either +1 or -1)
@@ -103,11 +99,29 @@ void draw_raycast(uint32_t *buffer, Map* map,
         if (drawEnd >= RENDER_HEIGHT)
             drawEnd = RENDER_HEIGHT - 1;
 
-        uint32_t wall_color = (side == 1) ? 0xAA00BB : 0xEE00DD;
+        //calculate value of wallX
+        float wallX; //where exactly the wall was hit
+        if (side == 0) wallX = posY + perpWallDist * rayDirY;
+        else           wallX = posX + perpWallDist * rayDirX;
+        wallX -= floorf(wallX);
 
+        //x coordinate on the texture
+        int8_t texX = (int8_t)(wallX * (float)(TEX_WIDTH));
+        if(side == 0 && rayDirX > 0) texX = TEX_WIDTH - texX - 1;
+        if(side == 1 && rayDirY < 0) texX = TEX_WIDTH - texX - 1;
+
+        // How much to increase the texture coordinate per screen pixel
+        float step = 1.0 * TEX_HEIGHT / lineHeight;
+        // Starting texture coordinate
+        float texPos = (drawStart - RENDER_HEIGHT / 2 + lineHeight / 2) * step;
         for (int y = drawStart; y < drawEnd+1; ++y) // draw a vertical strip into the pixel buffer
         {
-            buffer[RENDER_WIDTH * y + x] = wall_color;
+            // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+            int8_t texY = (int8_t)texPos &(TEX_HEIGHT - 1);
+            texPos += step;
+            uint32_t color = texture[TEX_WIDTH * texY + texX];
+            if (side == 1) color = (color >> 1) &8355711;
+            buffer[RENDER_WIDTH * y + x] = color;
         }
     }
 }

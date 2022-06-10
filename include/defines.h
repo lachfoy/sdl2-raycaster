@@ -5,5 +5,7 @@
 #define WINDOW_HEIGHT 600
 #define RENDER_WIDTH 300
 #define RENDER_HEIGHT 200
+#define TEX_WIDTH 64
+#define TEX_HEIGHT 64
 
 #endif
