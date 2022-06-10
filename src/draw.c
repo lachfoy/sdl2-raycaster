@@ -9,32 +9,32 @@ void draw_pixel(uint32_t *buffer, uint32_t x, uint32_t y, uint32_t color)
 }
 
 void draw_raycast(uint32_t *buffer, Map* map,
-    double posX, double posY, double dirX, double dirY,
-    double planeX, double planeY)
+    float posX, float posY, float dirX, float dirY,
+    float planeX, float planeY)
 {
-    for (int x = 0; x < RENDER_WIDTH; x++) // calculate a ray for each horizontal pixel
+    for (uint16_t x = 0; x < RENDER_WIDTH; x++) // calculate a ray for each horizontal pixel
     {
         // calculate ray position and direction
-        double cameraX = 2 * x / (double)(RENDER_WIDTH) - 1; // x-coordinate in camera space
-        double rayDirX = dirX + planeX * cameraX;
-        double rayDirY = dirY + planeY * cameraX;
+        float cameraX = 2 * x / (float)(RENDER_WIDTH) - 1; // x-coordinate in camera space
+        float rayDirX = dirX + planeX * cameraX;
+        float rayDirY = dirY + planeY * cameraX;
 
         // which box of the map we're in
         uint8_t mapX = (uint8_t)(posX);
         uint8_t mapY = (uint8_t)(posY);
 
         // length of ray from current position to next x or y-side
-        double sideDistX;
-        double sideDistY;
+        float sideDistX;
+        float sideDistY;
 
         // length of ray from one x or y-side to next x or y-side
-        double deltaDistX = (rayDirX == 0) ? 1e30 : abs(1 / rayDirX);
-        double deltaDistY = (rayDirY == 0) ? 1e30 : abs(1 / rayDirY);
+        // float deltaDistX = (rayDirX == 0) ? 1e30 : abs(1 / rayDirX);
+        // float deltaDistY = (rayDirY == 0) ? 1e30 : abs(1 / rayDirY);
         //deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX))
         //deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY))
-        // double deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
-        // double deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
-        double perpWallDist;
+        float deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
+        float deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
+        float perpWallDist;
 
         // what direction to step in x or y-direction (either +1 or -1)
         int8_t stepX;

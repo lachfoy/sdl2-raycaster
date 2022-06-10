@@ -12,12 +12,12 @@
 
 int main(int argc, char *argv[])
 {
-    double posX = 2, posY = 3;  //x and y start position
-    double dirX = -1, dirY = 0; //initial direction vector
-    double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
+    float posX = 2, posY = 3;  //x and y start position
+    float dirX = -1, dirY = 0; //initial direction vector
+    float planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
 
-    double time = 0; //time of current frame
-    double oldTime = 0; //time of previous frame
+    float time = 0; //time of current frame
+    float oldTime = 0; //time of previous frame
 
     Map test_map;
     generate_test_map(&test_map);
