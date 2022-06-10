@@ -12,4 +12,4 @@ add_executable(${PROJECT_NAME}
     src/game.c
 )
 
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} m)
