@@ -10,6 +10,7 @@ add_executable(${PROJECT_NAME}
     src/draw.c
     src/map.c
     src/game.c
+    src/pixbuffer.c
 )
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} m)

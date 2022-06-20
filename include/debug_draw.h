@@ -14,7 +14,7 @@ void debug_draw_map(SDL_Renderer* renderer, Map* map)
 {
     for (uint8_t x = 0; x < map->width; x++)
         for (uint8_t y = 0; y < map->height; y++)
-        if (map->data[map->width * y + x] > 0)
+        if (map->data[y * map->width + x] > 0)
         {
             SDL_Rect debug_tile = { x * DEBUG_DRAW_SIZE, y * DEBUG_DRAW_SIZE, DEBUG_DRAW_SIZE, DEBUG_DRAW_SIZE };
             SDL_SetRenderDrawColor(renderer, 0x00, 0xFF, 0xAA, 0xFF);

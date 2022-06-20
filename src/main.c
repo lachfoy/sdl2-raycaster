@@ -9,12 +9,19 @@
 #include "draw.h"
 #include "map.h"
 #include "debug_draw.h"
+#include "pixbuffer.h"
 
 int main(int argc, char *argv[])
 {
     float posX = 2, posY = 3;  //x and y start position
     float dirX = -1, dirY = 0; //initial direction vector
     float planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
+    float moveSpeed = 0.2;
+    float rotSpeed = 0.1;
+    float oldDirX;
+    float oldDirY;
+    float oldPlaneX;
+    float oldPlaneY;
 
     float time = 0; //time of current frame
     float oldTime = 0; //time of previous frame
@@ -67,43 +74,13 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    PixBuffer* pixBuffer = init_pixbuffer(RENDER_WIDTH, RENDER_HEIGHT);
+
     // MAIN LOOP
     int quit = false;
     SDL_Event e;
     while(!quit)
     {
-        // The Back Buffer texture may be stored with an extra bit of width (pitch) on the video card in order to properly
-        // align it in VRAM should the width not lie on the correct memory boundary (usually four bytes).
-        int32_t pitch = 0;
-
-        // This will hold a pointer to the memory position in VRAM where our Back Buffer texture lies
-        uint32_t *buffer = NULL;
-
-        // Lock the memory in order to write our Back Buffer image to it
-        if (!SDL_LockTexture(texture, NULL, (void **)&buffer, &pitch))
-        {
-            // The pitch of the Back Buffer texture in VRAM must be divided by four bytes
-            // as it will always be a multiple of four
-            pitch /= sizeof(uint32_t);
-
-            
-            for (uint32_t i = 0; i < RENDER_WIDTH * RENDER_HEIGHT; ++i)
-                buffer[i] = 0x0000AA;
-            draw_raycast(buffer, &test_map, test_texture, posX, posY, dirX, dirY, planeX, planeY);
-
-            // Unlock the texture in VRAM to let the GPU know we are done writing to it
-            SDL_UnlockTexture(texture);
-
-            // Copy our texture in VRAM to the display framebuffer in VRAM
-            SDL_RenderCopy(renderer, texture, NULL, NULL);
-        }
-
-        debug_draw_map(renderer, &test_map);
-        debug_draw_object(renderer, posX, posY, dirX, dirY);
-
-        // Copy the VRAM framebuffer to the display
-        SDL_RenderPresent(renderer);
-
         while (SDL_PollEvent(&e))
         {
             if (e.type == SDL_QUIT)
@@ -120,19 +97,33 @@ int main(int argc, char *argv[])
                     break;
                 
                 case SDLK_UP:
-                    posY -= 0.2;
+                    posX += dirX * moveSpeed;
+                    posY += dirY * moveSpeed;
                     break;
 
                 case SDLK_DOWN:
-                    posY += 0.2;
+                    posX -= dirX * moveSpeed;
+                    posY -= dirY * moveSpeed;
                     break;
                 
                 case SDLK_LEFT:
-                    posX -= 0.2;
+                    //both camera direction and camera plane must be rotated
+                    oldDirX = dirX;
+                    dirX = dirX * cosf(rotSpeed) - dirY * sinf(rotSpeed);
+                    dirY = oldDirX * sinf(rotSpeed) + dirY * cosf(rotSpeed);
+                    oldPlaneX = planeX;
+                    planeX = planeX * cosf(rotSpeed) - planeY * sinf(rotSpeed);
+                    planeY = oldPlaneX * sinf(rotSpeed) + planeY * cosf(rotSpeed);
                     break;
 
                 case SDLK_RIGHT:
-                    posX += 0.2;
+                    //both camera direction and camera plane must be rotated
+                    oldDirX = dirX;
+                    dirX = dirX * cosf(-rotSpeed) - dirY * sinf(-rotSpeed);
+                    dirY = oldDirX * sinf(-rotSpeed) + dirY * cosf(-rotSpeed);
+                    oldPlaneX = planeX;
+                    planeX = planeX * cosf(-rotSpeed) - planeY * sinf(-rotSpeed);
+                    planeY = oldPlaneX * sinf(-rotSpeed) + planeY * cosf(-rotSpeed);
                     break;
 
                 default:
@@ -140,12 +131,42 @@ int main(int argc, char *argv[])
                 }
             }
         }
+    
+                // The Back Buffer texture may be stored with an extra bit of width (pitch) on the video card in order to properly
+        // align it in VRAM should the width not lie on the correct memory boundary (usually four bytes).
+        int32_t pitch = 0;
 
-        SDL_Delay(33.3);
+        // Lock the memory in order to write our Back Buffer image to it
+        if (!SDL_LockTexture(texture, NULL, (void **)&pixBuffer->data, &pitch))
+        {
+            // The pitch of the Back Buffer texture in VRAM must be divided by four bytes
+            // as it will always be a multiple of four
+            pitch /= sizeof(uint32_t);
+
+            clear_pixbuffer(pixBuffer);
+            set_pixel(pixBuffer, 100, 80, 0xFF00FF);
+            // for (uint32_t i = 0; i < RENDER_WIDTH * RENDER_HEIGHT; ++i)
+            //     buffer[i] = 0x0000AA;
+            // draw_raycast(buffer, &test_map, test_texture, posX, posY, dirX, dirY, planeX, planeY);
+            // draw_pixel(buffer, 0, 0, 0xFFFFFF);
+            // draw_pixel(buffer, 149, 99, 0x0000FF);
+            // Unlock the texture in VRAM to let the GPU know we are done writing to it
+            SDL_UnlockTexture(texture);
+
+            // Copy our texture in VRAM to the display framebuffer in VRAM
+            SDL_RenderCopy(renderer, texture, NULL, NULL);
+        }
+
+        debug_draw_map(renderer, &test_map);
+        debug_draw_object(renderer, posX, posY, dirX, dirY);
+
+        // Copy the VRAM framebuffer to the display
+        SDL_RenderPresent(renderer);
     }
 
     free(test_map.data);
     free(test_texture);
+    delete_pixbuffer(pixBuffer);
 
     SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer);

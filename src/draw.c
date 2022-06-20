@@ -4,7 +4,7 @@ void draw_pixel(uint32_t *buffer, uint32_t x, uint32_t y, uint32_t color)
 {
     if (x >= 0 && x < RENDER_WIDTH && y >= 0 && y < RENDER_HEIGHT)
     {
-        buffer[RENDER_WIDTH * y + x] = color;
+        buffer[y * RENDER_WIDTH + x] = color;
     }
 }
 
@@ -119,9 +119,9 @@ void draw_raycast(uint32_t *buffer, Map* map, uint32_t *texture,
             // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
             int8_t texY = (int8_t)texPos &(TEX_HEIGHT - 1);
             texPos += step;
-            uint32_t color = texture[TEX_WIDTH * texY + texX];
+            uint32_t color = texture[texY* TEX_WIDTH + texX];
             if (side == 1) color = (color >> 1) &8355711;
-            buffer[RENDER_WIDTH * y + x] = color;
+            buffer[y * RENDER_WIDTH + x] = color;
         }
     }
 }
