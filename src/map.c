@@ -1,7 +1,10 @@
 #include "map.h"
 
-void generate_test_map(Map* test_map)
+Map* generate_test_map()
 {
+    // generate a test map with some hard coded data
+    Map* test_map = (Map*)malloc(sizeof(Map));
+
     test_map->width = 11;
     test_map->height = 10;
 
@@ -23,4 +26,12 @@ void generate_test_map(Map* test_map)
     test_map->data = (uint8_t*)malloc(sizeof(uint8_t) * 11 * 10);
     for (int i = 0; i < 11 * 10; i++)
         test_map->data[i]=data[i];
+
+    return test_map;
+}
+
+void delete_map(Map* map)
+{
+    free(map->data);
+    free(map);
 }

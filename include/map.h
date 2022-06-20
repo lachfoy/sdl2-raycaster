@@ -15,6 +15,7 @@ typedef struct Map
 
 // generate a test map
 // later this will probably be done by loading a binary or plaintext file
-void generate_test_map(Map* test_map);
+Map* generate_test_map();
+void delete_map(Map* map);
 
 #endif
