@@ -7,10 +7,9 @@ include_directories(${PROJECT_NAME} ${SDL2_INCLUDE_DIRS} include)
 
 add_executable(${PROJECT_NAME}
     src/main.c
+    src/pixbuffer.c
     src/draw.c
     src/map.c
-    src/game.c
-    src/pixbuffer.c
 )
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} m)

@@ -26,20 +26,7 @@ int main(int argc, char *argv[])
     float time = 0; //time of current frame
     float oldTime = 0; //time of previous frame
 
-    Map test_map;
-    generate_test_map(&test_map);
-    // for (int i = 0; i < 10 * 10; i++)
-    //     printf("%i\n", (&test_map)->data[i]);
-
-    // create an xor bitmap texture for testing
-    uint32_t* test_texture;
-    test_texture = (uint32_t*)malloc(sizeof(uint32_t) * TEX_WIDTH * TEX_HEIGHT);
-    for (uint8_t x = 0; x < TEX_WIDTH; x++)
-        for (uint8_t y = 0; y < TEX_HEIGHT; y++)
-        {
-            uint32_t xorcolor = (x * 256 / TEX_WIDTH) ^ (y * 256 / TEX_HEIGHT);
-            test_texture[TEX_WIDTH * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor;;
-        }
+    Map* test_map = generate_test_map();
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
@@ -132,7 +119,7 @@ int main(int argc, char *argv[])
             }
         }
     
-                // The Back Buffer texture may be stored with an extra bit of width (pitch) on the video card in order to properly
+        // The Back Buffer texture may be stored with an extra bit of width (pitch) on the video card in order to properly
         // align it in VRAM should the width not lie on the correct memory boundary (usually four bytes).
         int32_t pitch = 0;
 
@@ -144,12 +131,8 @@ int main(int argc, char *argv[])
             pitch /= sizeof(uint32_t);
 
             clear_pixbuffer(pixBuffer);
-            set_pixel(pixBuffer, 100, 80, 0xFF00FF);
-            // for (uint32_t i = 0; i < RENDER_WIDTH * RENDER_HEIGHT; ++i)
-            //     buffer[i] = 0x0000AA;
-            // draw_raycast(buffer, &test_map, test_texture, posX, posY, dirX, dirY, planeX, planeY);
-            // draw_pixel(buffer, 0, 0, 0xFFFFFF);
-            // draw_pixel(buffer, 149, 99, 0x0000FF);
+            //draw_raycast(pixBuffer, posX, posY, dirX, dirY, planeX, planeY, test_map);
+
             // Unlock the texture in VRAM to let the GPU know we are done writing to it
             SDL_UnlockTexture(texture);
 
@@ -157,15 +140,17 @@ int main(int argc, char *argv[])
             SDL_RenderCopy(renderer, texture, NULL, NULL);
         }
 
-        debug_draw_map(renderer, &test_map);
+        // debug drawing functions use SDL drawing funcs instead of the pixel buffer
+        debug_draw_map(renderer, test_map);
         debug_draw_object(renderer, posX, posY, dirX, dirY);
+
+        debug_draw_ray(renderer, posX, posY, dirX, dirY, test_map);
 
         // Copy the VRAM framebuffer to the display
         SDL_RenderPresent(renderer);
     }
 
-    free(test_map.data);
-    free(test_texture);
+    delete_map(test_map);
     delete_pixbuffer(pixBuffer);
 
     SDL_DestroyTexture(texture);
