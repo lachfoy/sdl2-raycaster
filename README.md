@@ -1,5 +1,5 @@
 ## SDL2 Raycaster
-
+# NOTE: PROJECT IS ON HOLD INDEFINITELY (I need to improve my maths, C and patience skills)
 ### TODO:
 
 - [x] Seperate pixel buffer out into its own object
